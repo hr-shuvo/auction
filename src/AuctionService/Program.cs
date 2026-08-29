@@ -13,20 +13,24 @@ builder.Services.AddDbContext<AuctionDbContext>(options =>
 });
 
 
-
 var app = builder.Build();
 
 
 if (app.Environment.IsDevelopment())
 {
-    
 }
 
 app.MapControllers();
 
 
-
+try
+{
+    DbInitializer.InitDb(app);
+}
+catch (Exception e)
+{
+    Console.WriteLine(e);
+}
 
 
 app.Run();
-
